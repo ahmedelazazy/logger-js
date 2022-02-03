@@ -1,0 +1,20 @@
+{
+	"name": "@ahmedelazazy/logger-js",
+	"version": "1.0.3",
+	"description": "JS Logger",
+	"main": "index.js",
+	"author": "Ahmed Elazazy",
+	"license": "ISC",
+	"homepage": "https://github.com/ahmedelazazy/logger-js#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ahmedelazazy/logger-js.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ahmedelazazy/logger-js/issues"
+	},
+	"dependencies": {
+		"caller-id": "^0.1.0",
+		"luxon": "^2.3.0"
+	}
+}
