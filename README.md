@@ -1,6 +1,14 @@
 # Logger JS
 
-A minimal package to help logging into Console & text files
+A minimal package to help logging into Console & text files. Flexible API to accept several types.
+
+Has basic options to enable/disable Console logging and enable/disable File logging.
+
+Can control the logs mode to be cleared everytime, appended, or saved into new folder.
+
+### Who shall use this?
+
+If you are looking for a quick way to save your logs formatted with timestamp to text files, here you go.
 
 ## Installation
 
@@ -10,50 +18,57 @@ npm i @ahmedelazazy/logger-js
 
 ## Getting Started
 
-```
+```js
 const { log } = require('@ahmedelazazy/logger-js')
 
-log("test logger")
+log('test logger')
+
+// Output:
+// {
+//   datetime: 'Tue, 2/22/2022, 01:11:39 PM UTC',
+//   unix: 1645535436,
+//   function: null,
+//   message: 'test logger'
+// }
 ```
 
-### Output
+---
 
-```
-{
-  datetime: 'Tue, 2/22/2022, 01:11:39 PM UTC',
-  unix: 1645535436,
-  function: null,
-  message: 'test logger'
-}
-```
+- Optionally call `init` once on startup with the settings
 
-## Advanced Settings
-
-Call `init` once on startup with the settings
-
-```
+```js
 const { log } = require('@ahmedelazazy/logger-js')
 
 const options = { timeZone: 'America/New_York' }
 
 init(options)
 
-log({ data: { a: 1, b: 2 }, message: 'data example' })
+log({ message: 'data example', data: { a: 1, b: 2 } })
+
+// Output:
+// {
+//   datetime: 'Tue, 2/22/2022, 08:08:43 AM EST',
+//   unix: 1645535323,
+//   function: null,
+//   message: 'data example',
+//   data: { a: 1, b: 2 }
+// }
 ```
 
-### Output
+## Log Record Fields
 
-```
-{
-  datetime: 'Tue, 2/22/2022, 08:08:43 AM EST',
-  unix: 1645535323,
-  function: null,
-  message: 'data example',
-  data: { a: 1, b: 2 }
-}
-```
+- `datetime` a human readable date/time of the log - the time zone is configured from the `init` options
+- `unix` the unix value of the log time
+- `function` the name of the function where the record was logged
+- `message` optional - a text message
+- `data` optional - an object to be logged
+- `error` optional - thrown exception
 
-## Options
+Every record should have at least one of the parameters: message, data or error.
+
+## Init Options
+
+You can customize the log, to enable/disable Console & Files
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -73,44 +88,43 @@ log({ data: { a: 1, b: 2 }, message: 'data example' })
 - **Number**
 - **Boolean**
 
-```
-log("test message") //valid
+```js
+log('test message') //valid
 log(1) //valid
 log(true) //valid
 ```
 
 - **Object**
 
-```
-log({name: 'A', num: 1}) //valid
+```js
+log({ name: 'A', num: 1 }) //valid
 ```
 
 - **Error object**
 
-```
+```js
 try {
-  invalidFn()
+	invalidFn()
 } catch (err) {
-  log(err) //valid
+	log(err) //valid
 }
 ```
 
 - **Options: {message, data, error}**
 
-```
+```js
 try {
-  const response = await getData()
+	const response = await getData()
 
-  log({
-      message: "Data fetched successfully",
-      data: response
-    })
-
-} catch(err){
-    log({
-      message: "Error while fetching data",
-      error: err
-    })
+	log({
+		message: 'Data fetched successfully',
+		data: response,
+	})
+} catch (err) {
+	log({
+		message: 'Error while fetching data',
+		error: err,
+	})
 }
 ```
 
@@ -120,7 +134,7 @@ try {
 
 - **Options**
 
-```
+```js
 {
 	enableFileLog: false,
 	enableFileError: true,

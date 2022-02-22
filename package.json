@@ -1,11 +1,17 @@
 {
 	"name": "@ahmedelazazy/logger-js",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "JS Logger",
 	"main": "index.js",
 	"author": "Ahmed Elazazy",
 	"license": "ISC",
 	"homepage": "https://github.com/ahmedelazazy/logger-js#readme",
+	"keywords": [
+		"log",
+		"logger",
+		"logging",
+		"json"
+	],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/ahmedelazazy/logger-js.git"
